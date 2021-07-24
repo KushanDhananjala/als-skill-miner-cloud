@@ -70,7 +70,7 @@ public class FIleController {
     @GetMapping(value = "api/v1/download")
     public ResponseEntity<InputStreamResource> downloadFile(@RequestParam("path") String path) {
         try {
-            return fileService.download(path.replace("/","\\"));
+            return fileService.download(path.replace("/", "\\"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);

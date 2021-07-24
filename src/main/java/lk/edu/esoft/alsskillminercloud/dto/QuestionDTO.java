@@ -20,5 +20,6 @@ public class QuestionDTO {
     private long viewsCount;
     private int active;
     private String userName;
+    private Long subjectId;
     private List<TagDetailDTO> tagDetailDTOList;
 }

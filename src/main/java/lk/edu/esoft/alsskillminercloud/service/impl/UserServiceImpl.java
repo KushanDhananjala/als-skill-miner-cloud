@@ -8,7 +8,6 @@ import lk.edu.esoft.alsskillminercloud.repository.UserRepository;
 import lk.edu.esoft.alsskillminercloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

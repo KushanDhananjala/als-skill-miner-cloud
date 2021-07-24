@@ -22,13 +22,12 @@ import java.util.Objects;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class FileServiceImpl implements FileService {
 
-    @Value("${app.location.uploaded-images}")
-    private String LOCATION_UPLOADED_IMAGES;
-
     private final String userImagesLocation = "user-images/";
     private final String adminImagesLocation = "admin-images/";
     private final String questionImagesLocation = "question-images/";
     private final String answerImagesLocation = "answer-images/";
+    @Value("${app.location.uploaded-images}")
+    private String LOCATION_UPLOADED_IMAGES;
 
     @Override
     public void storeUserImage(MultipartFile file, String userName) {

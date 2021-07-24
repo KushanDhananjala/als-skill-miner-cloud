@@ -6,10 +6,11 @@ import lk.edu.esoft.alsskillminercloud.entity.QuestionAttachment;
 import lk.edu.esoft.alsskillminercloud.entity.TagDetail;
 import lk.edu.esoft.alsskillminercloud.repository.QuestionAttachmentRepository;
 import lk.edu.esoft.alsskillminercloud.repository.QuestionRepository;
+import lk.edu.esoft.alsskillminercloud.repository.SubjectRepository;
 import lk.edu.esoft.alsskillminercloud.repository.UserRepository;
 import lk.edu.esoft.alsskillminercloud.service.QuestionService;
 import lk.edu.esoft.alsskillminercloud.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,16 +21,14 @@ import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+@RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private QuestionAttachmentRepository questionAttachmentRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserService userService;
+    private final QuestionRepository questionRepository;
+    private final QuestionAttachmentRepository questionAttachmentRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final SubjectRepository subjectRepository;
 
 
     @Override
@@ -45,6 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setAnswersCount(postQuestionDTO.getQuestionDTO().getAnswersCount());
         question.setViewsCount(postQuestionDTO.getQuestionDTO().getViewsCount());
         question.setActive(postQuestionDTO.getQuestionDTO().getActive());
+        question.setSubject(subjectRepository.findById(postQuestionDTO.getQuestionDTO().getSubjectId()).get());
         question.setUser(userRepository.findById(postQuestionDTO.getQuestionDTO().getUserName()).get());
 
         List<TagDetailDTO> tagDTOList = postQuestionDTO.getQuestionDTO().getTagDetailDTOList();
