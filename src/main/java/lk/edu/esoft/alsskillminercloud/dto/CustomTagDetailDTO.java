@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomTagDetailDTO {
 
-    private long questionID;
-    private long tagID;
+    private Long questionID;
+    private Long tagID;
     private String tagName;
 }

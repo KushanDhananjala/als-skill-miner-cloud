@@ -15,16 +15,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Tag {
+public class Stream {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String stream;
 
-    public Tag(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 }

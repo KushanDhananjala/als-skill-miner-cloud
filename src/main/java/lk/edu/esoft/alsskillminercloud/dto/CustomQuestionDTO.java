@@ -13,12 +13,12 @@ public class CustomQuestionDTO {
     private String userDisplyName;
     private String userprofileImageUrl;
     private String badgeName;
-    private long questionID;
+    private Long questionID;
     private String questionTitle;
     private String questionBody;
     private String questionCreationDate;
-    private long questionAnswersCount;
-    private long questionViewsCount;
-    private long questionVotesCount;
+    private Long questionAnswersCount;
+    private Long questionViewsCount;
+    private Long questionVotesCount;
     private int questionActive;
 }

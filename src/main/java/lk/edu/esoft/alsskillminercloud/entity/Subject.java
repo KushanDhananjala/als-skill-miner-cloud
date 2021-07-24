@@ -14,19 +14,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AnswerAttachment {
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "answer_id")
+    @JoinColumn(name = "stream_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Answer answer;
-    private String attachmentUrl;
+    private Stream stream;
+    private String subject;
 
-    public AnswerAttachment(Answer answer, String attachmentUrl) {
-        this.answer = answer;
-        this.attachmentUrl = attachmentUrl;
-    }
 }

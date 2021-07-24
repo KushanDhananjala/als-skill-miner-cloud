@@ -15,6 +15,6 @@ import java.io.Serializable;
 @ToString
 public class TagDetail_PK implements Serializable {
 
-    private long questionID;
-    private long tagID;
+    private Long questionID;
+    private Long tagID;
 }

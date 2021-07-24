@@ -19,7 +19,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String title;
     private String body;
     private String creationDate;
@@ -31,6 +31,10 @@ public class Question {
     @JoinColumn(name = "user_name")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Subject subject;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TagDetail> tagDetailList;
 }

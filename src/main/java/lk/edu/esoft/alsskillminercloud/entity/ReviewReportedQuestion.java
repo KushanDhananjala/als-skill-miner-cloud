@@ -18,7 +18,7 @@ public class ReviewReportedQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reported_id")
     private ReportedQuestion reportedQuestion;

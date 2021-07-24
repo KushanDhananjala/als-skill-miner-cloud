@@ -17,7 +17,7 @@ public class TagDetail {
     @EmbeddedId
     private TagDetail_PK tagDetail_pk;
 
-    public TagDetail(long questionID, long tagID) {
+    public TagDetail(Long questionID, Long tagID) {
         this.tagDetail_pk = new TagDetail_PK(questionID, tagID);
     }
 

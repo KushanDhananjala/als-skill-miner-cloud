@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
             UserDTO userDTO = new UserDTO(o[0].toString(), o[1].toString(), o[2].toString(), o[3].toString(),
                     (Integer) o[4], o[5].toString(), o[6].toString(), o[7].toString(), o[8].toString(),
                     o[9].toString(), o[10].toString(), o[11].toString(), Long.parseLong(o[12].toString()),
-                    (Integer) o[13]);
+                    (Long) o[13]);
 
             userDTOS.add(userDTO);
         }

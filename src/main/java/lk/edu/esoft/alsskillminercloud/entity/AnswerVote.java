@@ -18,7 +18,7 @@ public class AnswerVote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_name")
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -8,9 +8,9 @@ public interface BadgeService {
 
     boolean saveBadge(BadgeDTO badgeDTO) throws Exception;
 
-    BadgeDTO getBadge(int id) throws Exception;
+    BadgeDTO getBadge(Long id) throws Exception;
 
-    boolean deleteBadge(int id) throws Exception;
+    boolean deleteBadge(Long id) throws Exception;
 
     ArrayList<BadgeDTO> getAllBadges() throws Exception;
 

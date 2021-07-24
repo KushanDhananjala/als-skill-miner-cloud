@@ -65,7 +65,7 @@ public class ReviewReportedAnswerController {
                                           @RequestParam("adminName") String adminName,
                                           @RequestParam("date") String date) {
 
-        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0, id, adminName, date,
+        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0L, id, adminName, date,
                 "Ignored");
 
         try {
@@ -83,7 +83,7 @@ public class ReviewReportedAnswerController {
                                         @RequestParam("adminName") String adminName,
                                         @RequestParam("date") String date) {
 
-        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0, id, adminName, date,
+        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0L, id, adminName, date,
                 "Edited");
 
         AnswerDTO answerDTO = new AnswerDTO();
@@ -104,7 +104,7 @@ public class ReviewReportedAnswerController {
                                           @RequestParam("adminName") String adminName,
                                           @RequestParam("date") String date) {
 
-        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0, id, adminName, date,
+        ReviewReportedAnswerDTO reviewReportedAnswerDTO = new ReviewReportedAnswerDTO(0L, id, adminName, date,
                 "Removed");
 
         try {

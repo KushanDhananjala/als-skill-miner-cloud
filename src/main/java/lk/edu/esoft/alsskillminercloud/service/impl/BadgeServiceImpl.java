@@ -31,7 +31,7 @@ public class BadgeServiceImpl implements BadgeService {
     }
 
     @Override
-    public BadgeDTO getBadge(int id) throws Exception {
+    public BadgeDTO getBadge(Long id) throws Exception {
 
         Badge badge = badgeRepository.findById(id).get();
 
@@ -43,7 +43,7 @@ public class BadgeServiceImpl implements BadgeService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public boolean deleteBadge(int id) throws Exception {
+    public boolean deleteBadge(Long id) throws Exception {
 
         badgeRepository.deleteById(id);
 

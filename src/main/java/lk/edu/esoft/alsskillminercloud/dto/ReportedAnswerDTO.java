@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReportedAnswerDTO {
 
-    private long id;
+    private Long id;
     private String userName;
-    private long answerID;
+    private Long answerID;
     private String date;
     private String reason;
     private int status;

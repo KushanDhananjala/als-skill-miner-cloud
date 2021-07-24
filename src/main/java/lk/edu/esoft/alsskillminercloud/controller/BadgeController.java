@@ -27,7 +27,7 @@ public class BadgeController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BadgeDTO getBadge(@PathVariable("id") int id) {
+    public BadgeDTO getBadge(@PathVariable("id") Long id) {
         try {
             return badgeService.getBadge(id);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class BadgeController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean deleteBadge(@PathVariable("id") int id) {
+    public boolean deleteBadge(@PathVariable("id") Long id) {
         try {
             return badgeService.deleteBadge(id);
         } catch (Exception e) {

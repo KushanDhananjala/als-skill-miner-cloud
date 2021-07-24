@@ -21,5 +21,5 @@ public class UserDTO {
     private String githubUrl;
     private String profileImageUrl;
     private long points;
-    private int badgeID;
+    private Long badgeID;
 }

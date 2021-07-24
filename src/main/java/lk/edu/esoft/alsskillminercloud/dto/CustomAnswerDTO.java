@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomAnswerDTO {
 
-    private long answerID;
-    private long questionID;
+    private Long answerID;
+    private Long questionID;
     private String answer;
     private long score;
     private int status;

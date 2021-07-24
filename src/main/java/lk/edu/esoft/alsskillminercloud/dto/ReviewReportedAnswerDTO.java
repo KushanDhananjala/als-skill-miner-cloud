@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewReportedAnswerDTO {
 
-    private long id;
-    private long reportedID;
+    private Long id;
+    private Long reportedID;
     private String adminName;
     private String date;
     private String action;

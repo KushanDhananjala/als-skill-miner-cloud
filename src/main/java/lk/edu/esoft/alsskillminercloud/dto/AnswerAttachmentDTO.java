@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnswerAttachmentDTO {
 
-    private long id;
+    private Long id;
     private AnswerDTO answerDTO;
     private String attachmentUrl;
 }

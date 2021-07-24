@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomReportedAnswerDTO {
 
-    private long id;
+    private Long id;
     private String userName;
     private String userProfileImageUrl;
-    private long answerID;
+    private Long answerID;
     private String answer;
     private String date;
     private String reason;
     private int status;
-    private long questionID;
+    private Long questionID;
     private String question;
 }

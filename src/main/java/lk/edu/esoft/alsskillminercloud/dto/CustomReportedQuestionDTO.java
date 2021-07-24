@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomReportedQuestionDTO {
 
-    private long id;
+    private Long id;
     private String userName;
     private String userprofileImageUrl;
-    private long questionID;
+    private Long questionID;
     private String questionTitle;
     private String questionBody;
     private String date;

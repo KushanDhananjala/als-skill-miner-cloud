@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionDTO {
 
-    private long id;
+    private Long id;
     private String title;
     private String body;
     private String creationDate;

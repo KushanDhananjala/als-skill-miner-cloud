@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionVotesDTO {
-    private long id;
+    private Long id;
     private String userName;
-    private long questionID;
+    private Long questionID;
     private String date;
     private int status;
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BadgeDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private int points;
 }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TagDetailDTO {
 
-    private long questionID;
-    private long tagID;
+    private Long questionID;
+    private Long tagID;
 }

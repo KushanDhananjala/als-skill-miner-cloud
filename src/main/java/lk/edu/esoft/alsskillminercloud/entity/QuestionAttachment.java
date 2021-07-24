@@ -18,7 +18,7 @@ public class QuestionAttachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "question_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
