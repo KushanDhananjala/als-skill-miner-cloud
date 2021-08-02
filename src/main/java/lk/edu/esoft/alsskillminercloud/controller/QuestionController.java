@@ -48,20 +48,44 @@ public class QuestionController {
         }
     }
 
-    @GetMapping(value = "/landingPageQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<CustomQuestionDTO> getLandingPageQuestions() {
+    @GetMapping(value = "/landingPageQuestions/{streamId}/{subjectId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CustomQuestionDTO> getLandingPageQuestions(@PathVariable("streamId") Long streamId,
+                                                                @PathVariable(value = "subjectId", required = false) Long subjectId) {
         try {
-            return questionService.getLandingPageQuestions();
+            return questionService.getLandingPageQuestions(streamId, subjectId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    @GetMapping(value = "/recentQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<CustomQuestionDTO> getRecentQuestions() {
+    @GetMapping(value = "/recentQuestions/{streamId}/{subjectId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CustomQuestionDTO> getRecentQuestions(@PathVariable("streamId") Long streamId,
+                                                           @PathVariable(value = "subjectId", required = false) Long subjectId) {
         try {
-            return questionService.getRecentQuestions();
+            return questionService.getRecentQuestions(streamId, subjectId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/mostlyViewedQuestions/{streamId}/{subjectId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CustomQuestionDTO> getMostlyViewedQuestions(@PathVariable("streamId") Long streamId,
+                                                                 @PathVariable(value = "subjectId", required = false) Long subjectId) {
+        try {
+            return questionService.getMostlyViewedQuestions(streamId, subjectId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/mostlyVotedQuestions/{streamId}/{subjectId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CustomQuestionDTO> getMostlyVotedQuestions(@PathVariable("streamId") Long streamId,
+                                                                @PathVariable(value = "subjectId", required = false) Long subjectId) {
+        try {
+            return questionService.getMostlyVotedQuestions(streamId, subjectId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -72,26 +96,6 @@ public class QuestionController {
     public ArrayList<CustomQuestionDTO> getRecentFiveQuestions() {
         try {
             return questionService.getRecentFiveQuestions();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @GetMapping(value = "/mostlyViewedQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<CustomQuestionDTO> getMostlyViewedQuestions() {
-        try {
-            return questionService.getMostlyViewedQuestions();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @GetMapping(value = "/mostlyVotedQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<CustomQuestionDTO> getMostlyVotedQuestions() {
-        try {
-            return questionService.getMostlyVotedQuestions();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

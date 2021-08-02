@@ -30,7 +30,6 @@ public class QuestionServiceImpl implements QuestionService {
     private final UserService userService;
     private final SubjectRepository subjectRepository;
 
-
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean saveQuestion(PostQuestionDTO postQuestionDTO) throws Exception {
@@ -100,13 +99,13 @@ public class QuestionServiceImpl implements QuestionService {
         questionDTO.setActive(question.getActive());
         questionDTO.setUserName(question.getUser().getName());
 
-//        List<Tag> tags = question.getTagList();
-//        ArrayList<TagDTO> tagDTOS = new ArrayList<>();
-//
-//        for (Tag tag : tags) {
-//            TagDTO tagDTO = tagRepository.findById(tag.getId()).get();
-//            tagDTOS.add(tagDTO);
-//        }
+        //        List<Tag> tags = question.getTagList();
+        //        ArrayList<TagDTO> tagDTOS = new ArrayList<>();
+        //
+        //        for (Tag tag : tags) {
+        //            TagDTO tagDTO = tagRepository.findById(tag.getId()).get();
+        //            tagDTOS.add(tagDTO);
+        //        }
 
         questionDTO.setTagDetailDTOList(null);
 
@@ -158,9 +157,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public ArrayList<CustomQuestionDTO> getLandingPageQuestions() throws Exception {
+    public ArrayList<CustomQuestionDTO> getLandingPageQuestions(Long streamId, Long subjectId) throws Exception {
 
-        ArrayList<Object[]> objectArrayList = questionRepository.getLandingPageQuestions();
+        ArrayList<Object[]> objectArrayList = questionRepository.getLandingPageQuestions(streamId, subjectId);
         ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
 
         for (Object[] o : objectArrayList) {
@@ -185,8 +184,60 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public ArrayList<CustomQuestionDTO> getRecentQuestions() throws Exception {
-        ArrayList<Object[]> objectArrayList = questionRepository.getRecentQuestions();
+    public ArrayList<CustomQuestionDTO> getRecentQuestions(Long streamId, Long subjectId) throws Exception {
+        ArrayList<Object[]> objectArrayList = questionRepository.getRecentQuestions(streamId, subjectId);
+        ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
+
+        for (Object[] o : objectArrayList) {
+            CustomQuestionDTO customQuestionDTO = new CustomQuestionDTO();
+            customQuestionDTO.setUserName(o[0].toString());
+            customQuestionDTO.setUserDisplyName(o[1].toString());
+            customQuestionDTO.setUserprofileImageUrl(o[2].toString());
+            customQuestionDTO.setBadgeName(o[3].toString());
+            customQuestionDTO.setQuestionID((Long) o[4]);
+            customQuestionDTO.setQuestionTitle(o[5].toString());
+            customQuestionDTO.setQuestionBody(o[6].toString());
+            customQuestionDTO.setQuestionCreationDate(o[7].toString());
+            customQuestionDTO.setQuestionAnswersCount((Long) o[8]);
+            customQuestionDTO.setQuestionViewsCount((Long) o[9]);
+            customQuestionDTO.setQuestionVotesCount((Long) o[10]);
+            customQuestionDTO.setQuestionActive((Integer) o[11]);
+
+            customQuestionDTOList.add(customQuestionDTO);
+        }
+
+        return customQuestionDTOList;
+    }
+
+    @Override
+    public ArrayList<CustomQuestionDTO> getMostlyViewedQuestions(Long streamId, Long subjectId) throws Exception {
+        ArrayList<Object[]> objectArrayList = questionRepository.getMostlyViewedQuestions(streamId, subjectId);
+        ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
+
+        for (Object[] o : objectArrayList) {
+            CustomQuestionDTO customQuestionDTO = new CustomQuestionDTO();
+            customQuestionDTO.setUserName(o[0].toString());
+            customQuestionDTO.setUserDisplyName(o[1].toString());
+            customQuestionDTO.setUserprofileImageUrl(o[2].toString());
+            customQuestionDTO.setBadgeName(o[3].toString());
+            customQuestionDTO.setQuestionID((Long) o[4]);
+            customQuestionDTO.setQuestionTitle(o[5].toString());
+            customQuestionDTO.setQuestionBody(o[6].toString());
+            customQuestionDTO.setQuestionCreationDate(o[7].toString());
+            customQuestionDTO.setQuestionAnswersCount((Long) o[8]);
+            customQuestionDTO.setQuestionViewsCount((Long) o[9]);
+            customQuestionDTO.setQuestionVotesCount((Long) o[10]);
+            customQuestionDTO.setQuestionActive((Integer) o[11]);
+
+            customQuestionDTOList.add(customQuestionDTO);
+        }
+
+        return customQuestionDTOList;
+    }
+
+    @Override
+    public ArrayList<CustomQuestionDTO> getMostlyVotedQuestions(Long streamId, Long subjectId) throws Exception {
+        ArrayList<Object[]> objectArrayList = questionRepository.getMostlyVotedQuestions(streamId, subjectId);
         ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
 
         for (Object[] o : objectArrayList) {
@@ -213,58 +264,6 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public ArrayList<CustomQuestionDTO> getRecentFiveQuestions() throws Exception {
         ArrayList<Object[]> objectArrayList = questionRepository.getRecentFiveQuestions(PageRequest.of(0, 5));
-        ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
-
-        for (Object[] o : objectArrayList) {
-            CustomQuestionDTO customQuestionDTO = new CustomQuestionDTO();
-            customQuestionDTO.setUserName(o[0].toString());
-            customQuestionDTO.setUserDisplyName(o[1].toString());
-            customQuestionDTO.setUserprofileImageUrl(o[2].toString());
-            customQuestionDTO.setBadgeName(o[3].toString());
-            customQuestionDTO.setQuestionID((Long) o[4]);
-            customQuestionDTO.setQuestionTitle(o[5].toString());
-            customQuestionDTO.setQuestionBody(o[6].toString());
-            customQuestionDTO.setQuestionCreationDate(o[7].toString());
-            customQuestionDTO.setQuestionAnswersCount((Long) o[8]);
-            customQuestionDTO.setQuestionViewsCount((Long) o[9]);
-            customQuestionDTO.setQuestionVotesCount((Long) o[10]);
-            customQuestionDTO.setQuestionActive((Integer) o[11]);
-
-            customQuestionDTOList.add(customQuestionDTO);
-        }
-
-        return customQuestionDTOList;
-    }
-
-    @Override
-    public ArrayList<CustomQuestionDTO> getMostlyViewedQuestions() throws Exception {
-        ArrayList<Object[]> objectArrayList = questionRepository.getMostlyViewedQuestions();
-        ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
-
-        for (Object[] o : objectArrayList) {
-            CustomQuestionDTO customQuestionDTO = new CustomQuestionDTO();
-            customQuestionDTO.setUserName(o[0].toString());
-            customQuestionDTO.setUserDisplyName(o[1].toString());
-            customQuestionDTO.setUserprofileImageUrl(o[2].toString());
-            customQuestionDTO.setBadgeName(o[3].toString());
-            customQuestionDTO.setQuestionID((Long) o[4]);
-            customQuestionDTO.setQuestionTitle(o[5].toString());
-            customQuestionDTO.setQuestionBody(o[6].toString());
-            customQuestionDTO.setQuestionCreationDate(o[7].toString());
-            customQuestionDTO.setQuestionAnswersCount((Long) o[8]);
-            customQuestionDTO.setQuestionViewsCount((Long) o[9]);
-            customQuestionDTO.setQuestionVotesCount((Long) o[10]);
-            customQuestionDTO.setQuestionActive((Integer) o[11]);
-
-            customQuestionDTOList.add(customQuestionDTO);
-        }
-
-        return customQuestionDTOList;
-    }
-
-    @Override
-    public ArrayList<CustomQuestionDTO> getMostlyVotedQuestions() throws Exception {
-        ArrayList<Object[]> objectArrayList = questionRepository.getMostlyVotedQuestions();
         ArrayList<CustomQuestionDTO> customQuestionDTOList = new ArrayList<>();
 
         for (Object[] o : objectArrayList) {

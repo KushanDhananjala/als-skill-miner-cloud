@@ -18,15 +18,15 @@ public interface QuestionService {
 
     String getLastID() throws Exception;
 
-    ArrayList<CustomQuestionDTO> getLandingPageQuestions() throws Exception;
+    ArrayList<CustomQuestionDTO> getLandingPageQuestions(Long streamId, Long subjectId) throws Exception;
 
-    ArrayList<CustomQuestionDTO> getRecentQuestions() throws Exception;
+    ArrayList<CustomQuestionDTO> getRecentQuestions(Long streamId, Long subjectId) throws Exception;
+
+    ArrayList<CustomQuestionDTO> getMostlyViewedQuestions(Long streamId, Long subjectId) throws Exception;
+
+    ArrayList<CustomQuestionDTO> getMostlyVotedQuestions(Long streamId, Long subjectId) throws Exception;
 
     ArrayList<CustomQuestionDTO> getRecentFiveQuestions() throws Exception;
-
-    ArrayList<CustomQuestionDTO> getMostlyViewedQuestions() throws Exception;
-
-    ArrayList<CustomQuestionDTO> getMostlyVotedQuestions() throws Exception;
 
     long getUserQuestionCount(String name) throws Exception;
 
