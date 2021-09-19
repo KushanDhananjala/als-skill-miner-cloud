@@ -14,7 +14,10 @@ import lk.edu.esoft.alsskillminercloud.repository.QuestionRepository;
 import lk.edu.esoft.alsskillminercloud.repository.UserRepository;
 import lk.edu.esoft.alsskillminercloud.service.AnswerService;
 import lk.edu.esoft.alsskillminercloud.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,19 +27,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class AnswerServiceImpl implements AnswerService {
 
-    @Autowired
-    private AnswerRepository answerRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private AnswerAttachmentRepository answerAttachmentRepository;
-    @Autowired
-    private UserService userService;
+    private final AnswerRepository answerRepository;
+    private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerAttachmentRepository answerAttachmentRepository;
+    private final UserService userService;
+    private final JavaMailSender emailSender;
+
+    @Value("${spring.mail.username}")
+    private String senderEmail;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
@@ -65,6 +68,8 @@ public class AnswerServiceImpl implements AnswerService {
 
         long currentUserPoints = userRepository.getUserPoints(user.getName());
         userService.updateUserPoints(user.getName(), currentUserPoints + 5);
+
+        sendEmailAnswerProvided(question, user, postAnswerDTO.getAnswerDTO().getAnswer());
 
         return true;
 
@@ -137,5 +142,21 @@ public class AnswerServiceImpl implements AnswerService {
         userService.updateUserPoints(answerDTO.getUserName(), currentUserPoints + 1);
 
         return true;
+    }
+
+    public void sendEmailAnswerProvided(Question question, User user, String answer) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(senderEmail);
+        message.setTo(question.getUser().getEmail());
+        message.setSubject("Answer submitted : " + question.getTitle());
+
+        String msgBody = user.getName() + " has provided an answer for, \n\n" +
+                question.getTitle() + "\n" +
+                question.getBody() + "\n\n" +
+                "The answer is : " + answer + "\n" +
+                "Please visit http://localhost:4200/main/question?questionID=" + question.getId() + " for more details.";
+
+        message.setText(msgBody);
+        emailSender.send(message);
     }
 }

@@ -28,7 +28,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     void updateUserPoints(@Param("userName") String userName, @Param("points") long points);
 
     @Modifying
-    @Query(value = "UPDATE User u SET u.badgeID=:badgeID \n" +
+    @Query(value = "UPDATE User u SET u.badge_id=:badgeID \n" +
             "WHERE lower(u.name)=lower(:userName)", nativeQuery = true)
     void updateUserBadge(@Param("userName") String userName, @Param("badgeID") int badgeID);
 

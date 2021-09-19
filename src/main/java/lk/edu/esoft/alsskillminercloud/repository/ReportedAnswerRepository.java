@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public interface ReportedAnswerRepository extends JpaRepository<ReportedAnswer, Long> {
 
-    @Query(value = "SELECT ra.id, ra.userName, u.profileImageUrl, ra.answerID, a.answer, ra.date, ra.reason, ra.status, a.questionID, q.title \n" +
+    @Query(value = "SELECT ra.id, ra.user.name, u.profileImageUrl, ra.answer.id, a.answer, ra.date, ra.reason, ra.status, a.question.id, q.title \n" +
             "FROM ReportedAnswer ra, Answer a, User u, Question q \n" +
-            "WHERE ra.status=0 AND ra.userName=u.name AND ra.answerID=a.id AND a.questionID=q.id \n" +
-            "ORDER BY (ra.date) ASC", nativeQuery = true)
+            "WHERE ra.status=0 AND ra.user.name=u.name AND ra.answer.id=a.id AND a.question.id=q.id \n" +
+            "ORDER BY (ra.date) ASC")
     ArrayList<Object[]> getReportedAnswers();
 
     @Modifying
