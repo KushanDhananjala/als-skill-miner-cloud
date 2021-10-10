@@ -24,6 +24,7 @@ public class FileServiceImpl implements FileService {
 
     private final String userImagesLocation = "user-images/";
     private final String adminImagesLocation = "admin-images/";
+    private final String teacherImagesLocation = "teacher-images/";
     private final String questionImagesLocation = "question-images/";
     private final String answerImagesLocation = "answer-images/";
     @Value("${app.location.uploaded-images}")
@@ -49,6 +50,20 @@ public class FileServiceImpl implements FileService {
             Path path = Paths.get(LOCATION_UPLOADED_IMAGES + adminImagesLocation + userName + "/");
             Files.createDirectories(path);
             File f = new File(LOCATION_UPLOADED_IMAGES + adminImagesLocation + userName + "/" + file.getOriginalFilename());
+            if (!f.exists()) {
+                Files.copy(file.getInputStream(), path.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FAIL!");
+        }
+    }
+
+    @Override
+    public void storeTeacherImage(MultipartFile file, String userName) {
+        try {
+            Path path = Paths.get(LOCATION_UPLOADED_IMAGES + teacherImagesLocation + userName + "/");
+            Files.createDirectories(path);
+            File f = new File(LOCATION_UPLOADED_IMAGES + teacherImagesLocation + userName + "/" + file.getOriginalFilename());
             if (!f.exists()) {
                 Files.copy(file.getInputStream(), path.resolve(Objects.requireNonNull(file.getOriginalFilename())));
             }

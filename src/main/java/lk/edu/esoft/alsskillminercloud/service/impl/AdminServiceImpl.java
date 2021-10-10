@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
     public boolean saveAdmin(AdminDTO adminDTO) throws Exception {
 
         Admin admin = new Admin(adminDTO.getName(), adminDTO.getDisplayName(), adminDTO.getEmail(),
-                adminDTO.getPassword(), adminDTO.getAge(), adminDTO.getJoinDate(), adminDTO.getLocation(),
+                passwordEncoder.encode(adminDTO.getPassword()), adminDTO.getAge(), adminDTO.getJoinDate(), adminDTO.getLocation(),
                 adminDTO.getAbout(), adminDTO.getReputation(), adminDTO.getFacebookUrl(), adminDTO.getGithubUrl(),
                 adminDTO.getProfileImageUrl(), adminDTO.getPosition());
 

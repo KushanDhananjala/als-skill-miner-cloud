@@ -10,6 +10,8 @@ public interface FileService {
 
     void storeAdminImage(MultipartFile file, String userName) throws Exception;
 
+    void storeTeacherImage(MultipartFile file, String userName) throws Exception;
+
     void storeQuestionImages(MultipartFile file, long id) throws Exception;
 
     void storeAnswerImages(MultipartFile file, long id) throws Exception;

@@ -3,8 +3,6 @@ package lk.edu.esoft.alsskillminercloud.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -12,15 +10,16 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Subject {
+public class StreamSubjectDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "stream_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "stream_id", referencedColumnName = "id")
     private Stream stream;
-    private String subject;
+    @ManyToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Subject subject;
 
 }

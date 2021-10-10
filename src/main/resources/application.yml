@@ -42,5 +42,5 @@ spring:
 
 app:
   location:
-   uploaded-images: D:\WORK\ESOFT\Esoft Degree Documents\Subjects\Individual Project\Project\uploaded-images\
+    uploaded-images: C:\Users\TR0J3N's PC\Pictures\Individual Project\uploaded-images\
 

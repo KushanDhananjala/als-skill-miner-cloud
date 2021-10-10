@@ -41,6 +41,19 @@ public class FIleController {
         }
     }
 
+    @PostMapping(value = "api/v1/uploadTeacherImages")
+    public ResponseEntity<String> storeTeacherImage(@RequestParam("file") MultipartFile file, @RequestParam("userName") String userName) {
+        String status = null;
+        try {
+            fileService.storeTeacherImage(file, userName);
+            status = file.getOriginalFilename() + "upload complete";
+            return ResponseEntity.status(HttpStatus.OK).body(status);
+        } catch (Exception e) {
+            status = file.getOriginalFilename() + "upload faild";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(status);
+        }
+    }
+
     @PostMapping(value = "api/v1/uploadQuestionImages")
     public ResponseEntity<String> storeQuestionImages(@RequestParam("file") MultipartFile file, @RequestParam("id") long id) {
         String status = null;

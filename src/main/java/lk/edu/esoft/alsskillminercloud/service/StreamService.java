@@ -6,6 +6,12 @@ import java.util.List;
 
 public interface StreamService {
 
+    boolean save(StreamDTO streamDTO) throws Exception;
+
     List<StreamDTO> getStreams() throws Exception;
+
+    StreamDTO getStreamById(Long id) throws Exception;
+
+    boolean deleteStream(Long id) throws Exception;
 
 }
