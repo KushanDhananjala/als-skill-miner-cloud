@@ -4,7 +4,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface FileService {
+public interface ProfileImageService {
 
     void storeUserImage(MultipartFile file, String userName) throws Exception;
 

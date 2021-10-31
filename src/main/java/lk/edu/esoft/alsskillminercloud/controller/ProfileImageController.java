@@ -1,6 +1,6 @@
 package lk.edu.esoft.alsskillminercloud.controller;
 
-import lk.edu.esoft.alsskillminercloud.service.FileService;
+import lk.edu.esoft.alsskillminercloud.service.ProfileImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -10,16 +10,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin
-public class FIleController {
+public class ProfileImageController {
 
     @Autowired
-    private FileService fileService;
+    private ProfileImageService profileImageService;
 
     @PostMapping(value = "api/v1/uploadUserImages")
     public ResponseEntity<String> storeUserImage(@RequestParam("file") MultipartFile file, @RequestParam("userName") String userName) {
         String status = null;
         try {
-            fileService.storeUserImage(file, userName);
+            profileImageService.storeUserImage(file, userName);
             status = file.getOriginalFilename() + "upload complete";
             return ResponseEntity.status(HttpStatus.OK).body(status);
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class FIleController {
     public ResponseEntity<String> storeAdminImage(@RequestParam("file") MultipartFile file, @RequestParam("userName") String userName) {
         String status = null;
         try {
-            fileService.storeAdminImage(file, userName);
+            profileImageService.storeAdminImage(file, userName);
             status = file.getOriginalFilename() + "upload complete";
             return ResponseEntity.status(HttpStatus.OK).body(status);
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class FIleController {
     public ResponseEntity<String> storeTeacherImage(@RequestParam("file") MultipartFile file, @RequestParam("userName") String userName) {
         String status = null;
         try {
-            fileService.storeTeacherImage(file, userName);
+            profileImageService.storeTeacherImage(file, userName);
             status = file.getOriginalFilename() + "upload complete";
             return ResponseEntity.status(HttpStatus.OK).body(status);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class FIleController {
     public ResponseEntity<String> storeQuestionImages(@RequestParam("file") MultipartFile file, @RequestParam("id") long id) {
         String status = null;
         try {
-            fileService.storeQuestionImages(file, id);
+            profileImageService.storeQuestionImages(file, id);
             status = "Files upload complete";
             return ResponseEntity.status(HttpStatus.OK).body(status);
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class FIleController {
     public ResponseEntity<String> storeAnswerImages(@RequestParam("file") MultipartFile file, @RequestParam("id") long id) {
         String status = null;
         try {
-            fileService.storeAnswerImages(file, id);
+            profileImageService.storeAnswerImages(file, id);
             status = "Files upload complete";
             return ResponseEntity.status(HttpStatus.OK).body(status);
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class FIleController {
     @GetMapping(value = "api/v1/download")
     public ResponseEntity<InputStreamResource> downloadFile(@RequestParam("path") String path) {
         try {
-            return fileService.download(path.replace("/", "\\"));
+            return profileImageService.download(path.replace("/", "\\"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);

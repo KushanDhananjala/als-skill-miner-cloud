@@ -1,6 +1,6 @@
 package lk.edu.esoft.alsskillminercloud.service.impl;
 
-import lk.edu.esoft.alsskillminercloud.service.FileService;
+import lk.edu.esoft.alsskillminercloud.service.ProfileImageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -20,14 +20,14 @@ import java.util.Objects;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class FileServiceImpl implements FileService {
+public class ProfileImageServiceImpl implements ProfileImageService {
 
     private final String userImagesLocation = "user-images/";
     private final String adminImagesLocation = "admin-images/";
     private final String teacherImagesLocation = "teacher-images/";
     private final String questionImagesLocation = "question-images/";
     private final String answerImagesLocation = "answer-images/";
-    @Value("${app.location.uploaded-images}")
+    @Value("${app.location.uploaded.images}")
     private String LOCATION_UPLOADED_IMAGES;
 
     @Override
