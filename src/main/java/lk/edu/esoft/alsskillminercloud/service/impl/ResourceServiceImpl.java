@@ -9,12 +9,17 @@ import lk.edu.esoft.alsskillminercloud.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -72,6 +77,22 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public List<ResourceDTO> getResourcesByTeacher(Long teacherId) throws Exception {
+
+        if (teacherId == 0L) {
+            return getAllResources();
+        }
+
+        return resourceRepository
+                .findAllByTeacherAndExpireDateIsGreaterThanEqual(
+                        teacherRepository.findById(teacherId).get(),
+                        LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+                .stream()
+                .map(this::copyPropertiesToResourceDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<ResourceDTO> getAllResources() throws Exception {
         return resourceRepository
                 .findAllByExpireDateIsGreaterThanEqual(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")))
@@ -87,6 +108,24 @@ public class ResourceServiceImpl implements ResourceService {
         resource.setLastUpdated(new Date());
         resourceRepository.save(resource);
         return true;
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> downloadResource(Long id) throws Exception {
+        try {
+            Resource resource = resourceRepository.findById(id).get();
+
+            File file = new File(resource.getResourceUrl().replace("/", "\\"));
+            InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(file));
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment;filename=" + file.getName())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM).contentLength(file.length())
+                    .body(inputStreamResource);
+        } catch (Exception e) {
+            throw new RuntimeException("FAIL!");
+        }
     }
 
     private ResourceDTO copyPropertiesToResourceDTO(Resource resource) {

@@ -19,5 +19,6 @@ public class ResourceDTO {
     private String price;
     private String lastUpdated;
     private String resourceUrl;
+    private String fileName;
 
 }

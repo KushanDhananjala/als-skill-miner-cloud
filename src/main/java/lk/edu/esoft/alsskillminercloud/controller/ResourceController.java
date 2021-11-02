@@ -4,6 +4,7 @@ import lk.edu.esoft.alsskillminercloud.dto.ResourceDTO;
 import lk.edu.esoft.alsskillminercloud.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,9 +53,19 @@ public class ResourceController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResourceDTO> getStreamById(@PathVariable("id") Long id) {
+    public ResponseEntity<ResourceDTO> getResourcesById(@PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok(resourceService.getResource(id));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/by-teacher/{teacherId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ResourceDTO>> getResourcesByTeacher(@PathVariable("teacherId") Long teacherId) {
+        try {
+            return ResponseEntity.ok(resourceService.getResourcesByTeacher(teacherId));
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -68,6 +79,16 @@ public class ResourceController {
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.ok(false);
+        }
+    }
+
+    @GetMapping(value = "/download/{id}")
+    public ResponseEntity<InputStreamResource> downloadResource(@PathVariable("id") Long id) {
+        try {
+            return resourceService.downloadResource(id);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
         }
     }
 

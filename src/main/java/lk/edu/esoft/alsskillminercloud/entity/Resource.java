@@ -29,5 +29,6 @@ public class Resource {
     private String price;
     private Date lastUpdated;
     private String resourceUrl;
+    private String fileName;
 
 }
