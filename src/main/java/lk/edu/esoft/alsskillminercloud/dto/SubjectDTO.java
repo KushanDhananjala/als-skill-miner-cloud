@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SubjectDTO {
 
     private Long id;
-    private Long streamId;
+//    private Long streamId;
     private String subject;
 
 }

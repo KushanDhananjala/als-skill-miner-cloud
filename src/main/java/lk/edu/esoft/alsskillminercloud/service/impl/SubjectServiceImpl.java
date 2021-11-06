@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +48,17 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<SubjectDTO> getSubjectsByStream(Long streamId) throws Exception {
-        return subjectRepository.findAllByStreamId(streamId).stream().map(this::copyPropertiesSubjectDto).collect(Collectors.toList());
+        ArrayList<Object[]> objectArrayList = subjectRepository.getAllByStreamId(streamId);
+        ArrayList<SubjectDTO> subjectsByStreamId = new ArrayList<>();
+
+        for (Object[] o : objectArrayList) {
+            SubjectDTO subjectDTO = new SubjectDTO();
+            subjectDTO.setId(Long.getLong(o[0].toString()));
+            subjectDTO.setSubject(o[1].toString());
+
+            subjectsByStreamId.add(subjectDTO);
+        }
+        return subjectsByStreamId;
     }
 
     @Override

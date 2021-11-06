@@ -15,34 +15,38 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     String getLastID();
 
     @Query(value = "SELECT u.name,u.displayName,u.profileImageUrl,b.name,q.id,q.title,q.body,q.creationDate,q.answersCount,q.viewsCount,q.votesCount,q.active\n" +
-            "FROM User u,Badge b,Question q,Subject s \n" +
-            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
-            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND s.stream.id = lower(:streamId)) OR \n" +
+            "FROM User u,Badge b,Question q,Subject s,StreamSubjectDetail ssd \n" +
+            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND s.id = ssd.subject AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
+            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND ssd.stream = lower(:streamId)) OR \n" +
             "(0 <> lower(:streamId) AND 0 <> lower(:subjectId) AND q.subject.id = lower(:subjectId)))\n" +
+            "GROUP BY q.id\n" +
             "ORDER BY RAND()")
     ArrayList<Object[]> getLandingPageQuestions(@Param("streamId") Long streamId, @Param("subjectId") Long subjectId);
 
     @Query(value = "SELECT u.name,u.displayName,u.profileImageUrl,b.name,q.id,q.title,q.body,q.creationDate,q.answersCount,q.viewsCount,q.votesCount,q.active\n" +
-            "FROM User u,Badge b,Question q,Subject s \n" +
-            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
-            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND s.stream.id = lower(:streamId)) OR \n" +
+            "FROM User u,Badge b,Question q,Subject s,StreamSubjectDetail ssd \n" +
+            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND s.id = ssd.subject AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
+            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND ssd.stream = lower(:streamId)) OR \n" +
             "(0 <> lower(:streamId) AND 0 <> lower(:subjectId) AND q.subject.id = lower(:subjectId))) \n" +
+            "GROUP BY q.id\n" +
             "ORDER BY (q.id) DESC")
     ArrayList<Object[]> getRecentQuestions(@Param("streamId") Long streamId, @Param("subjectId") Long subjectId);
 
     @Query(value = "SELECT u.name,u.displayName,u.profileImageUrl,b.name,q.id,q.title,q.body,q.creationDate,q.answersCount,q.viewsCount,q.votesCount,q.active\n" +
-            "FROM User u,Badge b,Question q,Subject s \n" +
-            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
-            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND s.stream.id = lower(:streamId)) OR \n" +
+            "FROM User u,Badge b,Question q,Subject s,StreamSubjectDetail ssd \n" +
+            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND s.id = ssd.subject AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
+            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND ssd.stream = lower(:streamId)) OR \n" +
             "(0 <> lower(:streamId) AND 0 <> lower(:subjectId) AND q.subject.id = lower(:subjectId))) \n" +
+            "GROUP BY q.id\n" +
             "ORDER BY (q.viewsCount) DESC")
     ArrayList<Object[]> getMostlyViewedQuestions(@Param("streamId") Long streamId, @Param("subjectId") Long subjectId);
 
     @Query(value = "SELECT u.name,u.displayName,u.profileImageUrl,b.name,q.id,q.title,q.body,q.creationDate,q.answersCount,q.viewsCount,q.votesCount,q.active\n" +
-            "FROM User u,Badge b,Question q,Subject s \n" +
-            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
-            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND s.stream.id = lower(:streamId)) OR \n" +
+            "FROM User u,Badge b,Question q,Subject s,StreamSubjectDetail ssd \n" +
+            "WHERE u.badge=b.id AND q.user=u.name AND q.subject.id = s.id AND s.id = ssd.subject AND q.active=1 AND ((0 = lower(:streamId) AND 1 = 1) OR \n" +
+            "(0 <> lower(:streamId) AND 0 = lower(:subjectId) AND ssd.stream = lower(:streamId)) OR \n" +
             "(0 <> lower(:streamId) AND 0 <> lower(:subjectId) AND q.subject.id = lower(:subjectId))) \n" +
+            "GROUP BY q.id\n" +
             "ORDER BY (q.votesCount) DESC")
     ArrayList<Object[]> getMostlyVotedQuestions(@Param("streamId") Long streamId, @Param("subjectId") Long subjectId);
 
