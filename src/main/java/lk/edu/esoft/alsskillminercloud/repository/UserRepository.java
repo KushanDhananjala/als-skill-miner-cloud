@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface UserRepository extends JpaRepository<User, String> {
 
     @Query(value = "SELECT u.name, u.display_name, u.email, u.password, u.age, u.join_date, u.location, \n" +
-            "u.about, u.reputation, u.facebook_url, u.github_url, u.profile_image_url, u.points, u.badge_id \n" +
+            "u.about, u.reputation, u.facebook_url, u.mobile_no, u.profile_image_url, u.points, u.badge_id \n" +
             "FROM user u \n" +
             "ORDER BY (u.points) DESC", nativeQuery = true)
     ArrayList<Object[]> getTopFiveUsers(Pageable pageable);

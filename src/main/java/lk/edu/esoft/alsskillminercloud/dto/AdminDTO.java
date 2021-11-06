@@ -18,7 +18,7 @@ public class AdminDTO {
     private String about;
     private String reputation;
     private String facebookUrl;
-    private String githubUrl;
+    private String mobileNo;
     private String profileImageUrl;
     private int position;
 }

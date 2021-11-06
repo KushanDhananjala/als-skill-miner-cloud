@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         User user = new User(userDTO.getName(), userDTO.getDisplayName(), userDTO.getEmail(),
                 passwordEncoder.encode(userDTO.getPassword()), userDTO.getAge(), userDTO.getJoinDate(),
                 userDTO.getLocation(), userDTO.getAbout(), userDTO.getReputation(), userDTO.getFacebookUrl(),
-                userDTO.getGithubUrl(), userDTO.getProfileImageUrl(), userDTO.getPoints(), badge);
+                userDTO.getMobileNo(), userDTO.getProfileImageUrl(), userDTO.getPoints(), badge);
 
         userRepository.save(user);
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
         UserDTO userDTO = new UserDTO(user.getName(), user.getDisplayName(), user.getEmail(), user.getPassword(),
                 user.getAge(), user.getJoinDate(), user.getLocation(), user.getAbout(), user.getReputation(),
-                user.getFacebookUrl(), user.getGithubUrl(), user.getProfileImageUrl(), user.getPoints(),
+                user.getFacebookUrl(), user.getMobileNo(), user.getProfileImageUrl(), user.getPoints(),
                 user.getBadge().getId());
 
         return userDTO;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             UserDTO userDTO = new UserDTO(user.getName(), user.getDisplayName(), user.getEmail(), user.getPassword(),
                     user.getAge(), user.getJoinDate(), user.getLocation(), user.getAbout(), user.getReputation(),
-                    user.getFacebookUrl(), user.getGithubUrl(), user.getProfileImageUrl(), user.getPoints(),
+                    user.getFacebookUrl(), user.getMobileNo(), user.getProfileImageUrl(), user.getPoints(),
                     user.getBadge().getId());
 
             userDTOS.add(userDTO);
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         User user = new User(userDTO.getName(), userDTO.getDisplayName(), userDTO.getEmail(),
                 passwordEncoder.encode(userDTO.getPassword()), userDTO.getAge(), userDTO.getJoinDate(),
                 userDTO.getLocation(), userDTO.getAbout(), userDTO.getReputation(), userDTO.getFacebookUrl(),
-                userDTO.getGithubUrl(), userDTO.getProfileImageUrl(), userDTO.getPoints(), badge);
+                userDTO.getMobileNo(), userDTO.getProfileImageUrl(), userDTO.getPoints(), badge);
 
         userRepository.save(user);
 

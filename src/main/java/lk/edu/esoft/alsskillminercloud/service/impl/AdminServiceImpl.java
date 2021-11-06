@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
 
         Admin admin = new Admin(adminDTO.getName(), adminDTO.getDisplayName(), adminDTO.getEmail(),
                 passwordEncoder.encode(adminDTO.getPassword()), adminDTO.getAge(), adminDTO.getJoinDate(), adminDTO.getLocation(),
-                adminDTO.getAbout(), adminDTO.getReputation(), adminDTO.getFacebookUrl(), adminDTO.getGithubUrl(),
+                adminDTO.getAbout(), adminDTO.getReputation(), adminDTO.getFacebookUrl(), adminDTO.getMobileNo(),
                 adminDTO.getProfileImageUrl(), adminDTO.getPosition());
 
         adminRepository.save(admin);
@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService {
 
         AdminDTO adminDTO = new AdminDTO(admin.getName(), admin.getDisplayName(), admin.getEmail(),
                 admin.getPassword(), admin.getAge(), admin.getJoinDate(), admin.getLocation(),
-                admin.getAbout(), admin.getReputation(), admin.getFacebookUrl(), admin.getGithubUrl(),
+                admin.getAbout(), admin.getReputation(), admin.getFacebookUrl(), admin.getMobileNo(),
                 admin.getProfileImageUrl(), admin.getPosition());
 
         return adminDTO;
@@ -67,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
             AdminDTO adminDTO = new AdminDTO(admin.getName(), admin.getDisplayName(), admin.getEmail(),
                     passwordEncoder.encode(admin.getPassword()), admin.getAge(), admin.getJoinDate(),
                     admin.getLocation(), admin.getAbout(), admin.getReputation(), admin.getFacebookUrl(),
-                    admin.getGithubUrl(), admin.getProfileImageUrl(), admin.getPosition());
+                    admin.getMobileNo(), admin.getProfileImageUrl(), admin.getPosition());
 
             adminDTOS.add(adminDTO);
         }
