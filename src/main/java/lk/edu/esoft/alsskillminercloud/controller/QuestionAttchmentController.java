@@ -2,12 +2,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.QuestionAttachmentDTO;
 import lk.edu.esoft.alsskillminercloud.service.QuestionAttachmentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/questionattachments")
@@ -21,7 +23,7 @@ public class QuestionAttchmentController {
         try {
             return questionAttachmentService.deleteQuestionAttchment(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -31,7 +33,7 @@ public class QuestionAttchmentController {
         try {
             return questionAttachmentService.getAllQuestionAttchments();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -41,7 +43,7 @@ public class QuestionAttchmentController {
         try {
             return questionAttachmentService.getSelectedQuestionAttachments(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }

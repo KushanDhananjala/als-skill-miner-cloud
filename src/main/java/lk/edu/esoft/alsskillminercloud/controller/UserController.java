@@ -2,12 +2,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.UserDTO;
 import lk.edu.esoft.alsskillminercloud.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/users")
@@ -21,7 +23,7 @@ public class UserController {
         try {
             return userService.saveUser(userDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -31,7 +33,7 @@ public class UserController {
         try {
             return userService.getUser(name);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -41,7 +43,7 @@ public class UserController {
         try {
             return userService.deleteUser(name);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -51,7 +53,7 @@ public class UserController {
         try {
             return userService.getAllUsers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -61,7 +63,7 @@ public class UserController {
         try {
             return userService.canAuthenticate(userDTO.getName(), userDTO.getPassword());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -71,7 +73,7 @@ public class UserController {
         try {
             return userService.getTotalUsers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -81,7 +83,7 @@ public class UserController {
         try {
             return userService.updateUser(userDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -91,7 +93,7 @@ public class UserController {
         try {
             return userService.getTopFiveUsers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -101,7 +103,7 @@ public class UserController {
         try {
             return userService.updateUserPoints(userName, points);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

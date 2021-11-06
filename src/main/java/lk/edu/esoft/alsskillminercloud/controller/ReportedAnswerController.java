@@ -3,12 +3,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 import lk.edu.esoft.alsskillminercloud.dto.CustomReportedAnswerDTO;
 import lk.edu.esoft.alsskillminercloud.dto.ReportedAnswerDTO;
 import lk.edu.esoft.alsskillminercloud.service.ReportedAnswerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/reportedanswers")
@@ -22,7 +24,7 @@ public class ReportedAnswerController {
         try {
             return reportedAnswerService.saveReportedAnswer(reportedAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -32,7 +34,7 @@ public class ReportedAnswerController {
         try {
             return reportedAnswerService.getReportedAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -42,7 +44,7 @@ public class ReportedAnswerController {
         try {
             return reportedAnswerService.deleteReportedAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -52,7 +54,7 @@ public class ReportedAnswerController {
         try {
             return reportedAnswerService.getAllReportedAnswers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -62,7 +64,7 @@ public class ReportedAnswerController {
         try {
             return reportedAnswerService.getReportedAnswers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }

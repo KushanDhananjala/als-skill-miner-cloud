@@ -3,12 +3,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 import lk.edu.esoft.alsskillminercloud.dto.AnswerDTO;
 import lk.edu.esoft.alsskillminercloud.dto.ReviewReportedAnswerDTO;
 import lk.edu.esoft.alsskillminercloud.service.ReviewReportedAnswerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/reviewreportedanswers")
@@ -22,7 +24,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.saveReviewAnswer(ReviewReportedAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -33,7 +35,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.getReviewAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
 
@@ -44,7 +46,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.deleteReviewAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -54,7 +56,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.getAllReviewAnswers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -71,7 +73,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.ignoreReportedAnswer(status, answerID, reviewReportedAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -93,7 +95,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.editReportedAnswer(status, answerDTO, reviewReportedAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -110,7 +112,7 @@ public class ReviewReportedAnswerController {
         try {
             return reviewReportedAnswerService.removeReportedAnswer(status, answerID, reviewReportedAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

@@ -4,12 +4,14 @@ import lk.edu.esoft.alsskillminercloud.dto.AnswerDTO;
 import lk.edu.esoft.alsskillminercloud.dto.CustomAnswerDTO;
 import lk.edu.esoft.alsskillminercloud.dto.PostAnswerDTO;
 import lk.edu.esoft.alsskillminercloud.service.AnswerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/answers")
@@ -23,7 +25,7 @@ public class AnswerController {
         try {
             return answerService.saveAnswer(postAnswerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -33,7 +35,7 @@ public class AnswerController {
         try {
             return answerService.getAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -43,7 +45,7 @@ public class AnswerController {
         try {
             return answerService.deleteAnswer(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -53,7 +55,7 @@ public class AnswerController {
         try {
             return answerService.getQuestionAnswers(questionID);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -63,7 +65,7 @@ public class AnswerController {
         try {
             return Long.parseLong(answerService.getLastID());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -73,7 +75,7 @@ public class AnswerController {
         try {
             return answerService.getTotalAnswers();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -83,7 +85,7 @@ public class AnswerController {
         try {
             return answerService.getUserAnswerCount(name);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -93,7 +95,7 @@ public class AnswerController {
         try {
             return answerService.increseScore(answerDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

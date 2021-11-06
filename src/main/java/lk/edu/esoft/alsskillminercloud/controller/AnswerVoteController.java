@@ -2,12 +2,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.AnswerVoteDTO;
 import lk.edu.esoft.alsskillminercloud.service.AnswerVoteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/answervotes")
@@ -21,7 +23,7 @@ public class AnswerVoteController {
         try {
             return answerVoteService.saveAnswerVote(answerVoteDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -31,7 +33,7 @@ public class AnswerVoteController {
         try {
             return answerVoteService.getAnswerVote(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -41,7 +43,7 @@ public class AnswerVoteController {
         try {
             return answerVoteService.deleteAnswerVote(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -51,7 +53,7 @@ public class AnswerVoteController {
         try {
             return answerVoteService.getAllAnswerVotes();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -61,7 +63,7 @@ public class AnswerVoteController {
         try {
             return answerVoteService.getUserAnswerVotesCount(userName, answerID);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }

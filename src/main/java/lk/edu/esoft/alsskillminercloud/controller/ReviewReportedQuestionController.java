@@ -3,12 +3,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 import lk.edu.esoft.alsskillminercloud.dto.QuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.ReviewReportedQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.service.ReviewReportedQuestionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/reviewreportedquestions")
@@ -22,7 +24,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.saveReviewQuestion(reviewReportedQuestionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -32,7 +34,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.getReviewQuestion(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -42,7 +44,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.deleteReviewQuestion(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -52,7 +54,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.getAllReviewQuestions();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -69,7 +71,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.ignoreReportedQuestion(status, questionID, reviewReportedQuestionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -93,7 +95,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.editReportedQuestion(status, questionDTO, reviewReportedQuestionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -110,7 +112,7 @@ public class ReviewReportedQuestionController {
         try {
             return reviewReportedQuestionService.removeReportedQuestion(status, questionID, reviewReportedQuestionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

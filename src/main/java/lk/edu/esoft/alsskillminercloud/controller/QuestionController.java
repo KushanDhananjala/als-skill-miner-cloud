@@ -4,12 +4,14 @@ import lk.edu.esoft.alsskillminercloud.dto.CustomQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.PostQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.QuestionDTO;
 import lk.edu.esoft.alsskillminercloud.service.QuestionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/questions")
@@ -23,7 +25,7 @@ public class QuestionController {
         try {
             return questionService.saveQuestion(postQuestionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -33,7 +35,7 @@ public class QuestionController {
         try {
             return questionService.getQuestion(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -43,7 +45,7 @@ public class QuestionController {
         try {
             return questionService.getAllQuestions();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -54,7 +56,7 @@ public class QuestionController {
         try {
             return questionService.getLandingPageQuestions(streamId, subjectId);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -65,7 +67,7 @@ public class QuestionController {
         try {
             return questionService.getRecentQuestions(streamId, subjectId);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -76,7 +78,7 @@ public class QuestionController {
         try {
             return questionService.getMostlyViewedQuestions(streamId, subjectId);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -87,7 +89,7 @@ public class QuestionController {
         try {
             return questionService.getMostlyVotedQuestions(streamId, subjectId);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -97,7 +99,7 @@ public class QuestionController {
         try {
             return questionService.getRecentFiveQuestions();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -107,7 +109,7 @@ public class QuestionController {
         try {
             return Long.parseLong(questionService.getLastID());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -117,7 +119,7 @@ public class QuestionController {
         try {
             return questionService.getUserQuestionCount(name);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -127,7 +129,7 @@ public class QuestionController {
         try {
             return questionService.increseCounts(questionDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -137,7 +139,7 @@ public class QuestionController {
         try {
             return questionService.getTotalQuestions();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -147,7 +149,7 @@ public class QuestionController {
         try {
             return questionService.updateQuestionTitleAndBody(title, body, id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -157,7 +159,7 @@ public class QuestionController {
         try {
             return questionService.updateQuestionActiveStatus(active, id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

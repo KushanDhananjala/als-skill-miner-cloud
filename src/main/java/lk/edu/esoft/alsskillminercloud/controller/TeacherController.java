@@ -74,7 +74,7 @@ public class TeacherController {
         try {
             return teacherService.canAuthenticate(teacherDTO.getUserName(), teacherDTO.getPassword());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }

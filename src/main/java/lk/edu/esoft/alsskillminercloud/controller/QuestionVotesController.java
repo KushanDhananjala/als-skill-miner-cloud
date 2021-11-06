@@ -2,12 +2,14 @@ package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.QuestionVotesDTO;
 import lk.edu.esoft.alsskillminercloud.service.QuestionVoteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/questionvotes")
@@ -21,7 +23,7 @@ public class QuestionVotesController {
         try {
             return questionVoteService.saveQuestionVote(questionVotesDTO);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -31,7 +33,7 @@ public class QuestionVotesController {
         try {
             return questionVoteService.getQuestionVote(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -41,7 +43,7 @@ public class QuestionVotesController {
         try {
             return questionVoteService.deleteQuestionVote(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -51,7 +53,7 @@ public class QuestionVotesController {
         try {
             return questionVoteService.getAllQuestionVotes();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -61,7 +63,7 @@ public class QuestionVotesController {
         try {
             return questionVoteService.getUserQuestionVotesCount(userName, questionID);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return 0;
         }
     }

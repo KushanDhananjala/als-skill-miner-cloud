@@ -2,6 +2,7 @@ package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.CustomTagDetailDTO;
 import lk.edu.esoft.alsskillminercloud.service.TagDetailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+@Slf4j
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/tagdetails")
@@ -24,7 +26,7 @@ public class TagDetailController {
         try {
             return tagDetailService.getAllQuestionsTags();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
