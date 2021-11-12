@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setAnswersCount(postQuestionDTO.getQuestionDTO().getAnswersCount());
         question.setViewsCount(postQuestionDTO.getQuestionDTO().getViewsCount());
         question.setActive(postQuestionDTO.getQuestionDTO().getActive());
+        question.setCreatedDateTime(LocalDateTime.now());
         question.setSubject(subjectRepository.findById(postQuestionDTO.getQuestionDTO().getSubjectId()).get());
         question.setUser(userRepository.findById(postQuestionDTO.getQuestionDTO().getUserName()).get());
 
@@ -321,5 +324,26 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionRepository.updateQuestionActiveStatus(active, id);
         return true;
+    }
+
+    @Override
+    public ArrayList<SubjectWiseQuestionCountDTO> getSubjectWiseQuestionCount(String strFromDate, String strToDate) throws Exception {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime fromDate = LocalDateTime.parse(strFromDate, formatter);
+        LocalDateTime toDate = LocalDateTime.parse(strToDate, formatter);
+
+        ArrayList<Object[]> objectArrayList = questionRepository.getSubjectWiseQuestionCount(fromDate, toDate);
+        ArrayList<SubjectWiseQuestionCountDTO> questionCountDTOS = new ArrayList<>();
+
+        for (Object[] o : objectArrayList) {
+            SubjectWiseQuestionCountDTO subjectWiseQuestionCountDTO = new SubjectWiseQuestionCountDTO();
+            subjectWiseQuestionCountDTO.setSubjectId(Long.parseLong(o[0].toString()));
+            subjectWiseQuestionCountDTO.setSubjectName(o[1].toString());
+            subjectWiseQuestionCountDTO.setQuestionCount(Long.parseLong(o[2].toString()));
+
+            questionCountDTOS.add(subjectWiseQuestionCountDTO);
+        }
+        return questionCountDTOS;
     }
 }

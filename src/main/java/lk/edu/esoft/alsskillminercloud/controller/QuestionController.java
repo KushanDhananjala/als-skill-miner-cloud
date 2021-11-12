@@ -3,6 +3,7 @@ package lk.edu.esoft.alsskillminercloud.controller;
 import lk.edu.esoft.alsskillminercloud.dto.CustomQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.PostQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.QuestionDTO;
+import lk.edu.esoft.alsskillminercloud.dto.SubjectWiseQuestionCountDTO;
 import lk.edu.esoft.alsskillminercloud.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,6 +162,17 @@ public class QuestionController {
         } catch (Exception e) {
             log.error(e.getMessage());
             return false;
+        }
+    }
+
+    @GetMapping(value = "/subjectWiseQuestionCount/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<SubjectWiseQuestionCountDTO> getSubjectWiseQuestionCount(@PathVariable("fromDate") String fromDate,
+                                                                              @PathVariable("toDate") String toDate) {
+        try {
+            return questionService.getSubjectWiseQuestionCount(fromDate, toDate);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
         }
     }
 

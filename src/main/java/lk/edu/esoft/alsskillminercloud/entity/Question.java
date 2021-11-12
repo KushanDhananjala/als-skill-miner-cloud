@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -37,4 +38,5 @@ public class Question {
     private Subject subject;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TagDetail> tagDetailList;
+    private LocalDateTime createdDateTime;
 }

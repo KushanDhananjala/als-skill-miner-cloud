@@ -3,6 +3,7 @@ package lk.edu.esoft.alsskillminercloud.service;
 import lk.edu.esoft.alsskillminercloud.dto.CustomQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.PostQuestionDTO;
 import lk.edu.esoft.alsskillminercloud.dto.QuestionDTO;
+import lk.edu.esoft.alsskillminercloud.dto.SubjectWiseQuestionCountDTO;
 
 import java.util.ArrayList;
 
@@ -37,5 +38,7 @@ public interface QuestionService {
     boolean updateQuestionTitleAndBody(String title, String body, long id) throws Exception;
 
     boolean updateQuestionActiveStatus(int active, long id) throws Exception;
+
+    ArrayList<SubjectWiseQuestionCountDTO> getSubjectWiseQuestionCount(String strFromDate, String strToDate) throws Exception;
 
 }

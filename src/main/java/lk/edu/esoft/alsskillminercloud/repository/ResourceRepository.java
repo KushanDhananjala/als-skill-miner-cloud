@@ -5,6 +5,7 @@ import lk.edu.esoft.alsskillminercloud.entity.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -13,5 +14,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
     List<Resource> findAllByExpireDateIsGreaterThanEqual(String expireDate);
 
     List<Resource> findAllByTeacherAndExpireDateIsGreaterThanEqual(Teacher teacher, String expireDate);
+
+    List<Resource> findAllByLastUpdatedBetween(Date fromDate, Date toDate);
 
 }

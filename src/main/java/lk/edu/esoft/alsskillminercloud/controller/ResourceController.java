@@ -92,4 +92,15 @@ public class ResourceController {
         }
     }
 
+    @GetMapping(value = "/by-last-updated-date-range/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ResourceDTO> getResourcesByLastUpdatedDateRange(@PathVariable("fromDate") String fromDate,
+                                                                @PathVariable("toDate") String toDate) {
+        try {
+            return resourceService.getResourcesByLastUpdatedDateRange(fromDate, toDate);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
 }

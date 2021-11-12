@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -126,6 +128,20 @@ public class ResourceServiceImpl implements ResourceService {
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
+    }
+
+    @Override
+    public List<ResourceDTO> getResourcesByLastUpdatedDateRange(String strFromDate, String strToDate) throws Exception {
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date fromDate = df.parse(strFromDate);
+        Date toDate = df.parse(strToDate);
+
+        return resourceRepository
+                .findAllByLastUpdatedBetween(fromDate, toDate)
+                .stream()
+                .map(this::copyPropertiesToResourceDTO)
+                .collect(Collectors.toList());
     }
 
     private ResourceDTO copyPropertiesToResourceDTO(Resource resource) {

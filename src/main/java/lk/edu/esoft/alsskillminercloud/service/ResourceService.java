@@ -23,4 +23,6 @@ public interface ResourceService {
 
     ResponseEntity<InputStreamResource> downloadResource(Long id) throws Exception;
 
+    List<ResourceDTO> getResourcesByLastUpdatedDateRange(String strFromDate, String strToDate) throws Exception;
+
 }

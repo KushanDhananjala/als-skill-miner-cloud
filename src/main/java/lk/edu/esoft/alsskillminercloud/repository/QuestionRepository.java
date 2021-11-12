@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
@@ -74,5 +75,17 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query(value = "UPDATE Question q SET q.active=:active \n" +
             "WHERE lower(q.id)=lower(:id)")
     void updateQuestionActiveStatus(@Param("active") int active, @Param("id") long id);
+
+    @Query(value = "SELECT \n" +
+            "   q.subject.id, \n" +
+            "   s.subject, \n" +
+            "   COUNT( q.subject.id ) \n" +
+            "FROM\n" +
+            "   Question q\n" +
+            "   INNER JOIN Subject s ON q.subject.id = s.id \n" +
+            "WHERE q.createdDateTime BETWEEN :fromDate AND :toDate \n" +
+            "GROUP BY\n" +
+            "   q.subject.id")
+    ArrayList<Object[]> getSubjectWiseQuestionCount(@Param("fromDate") LocalDateTime fromDate, @Param("toDate") LocalDateTime toDate);
 
 }
