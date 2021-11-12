@@ -57,8 +57,6 @@ public class AnswerServiceImpl implements AnswerService {
 
         List<AnswerAttachmentDTO> answerAttachmentDTOS = postAnswerDTO.getAnswerAttachmentDTOList();
 
-        boolean addAttchment = false;
-
         if (answerAttachmentDTOS != null) {
             for (AnswerAttachmentDTO answerAttachmentDTO : answerAttachmentDTOS) {
                 AnswerAttachment answerAttachment = new AnswerAttachment(answer, answerAttachmentDTO.getAttachmentUrl());

@@ -53,7 +53,7 @@ public class SubjectServiceImpl implements SubjectService {
 
         for (Object[] o : objectArrayList) {
             SubjectDTO subjectDTO = new SubjectDTO();
-            subjectDTO.setId(Long.getLong(o[0].toString()));
+            subjectDTO.setId(Long.parseLong(o[0].toString()));
             subjectDTO.setSubject(o[1].toString());
 
             subjectsByStreamId.add(subjectDTO);

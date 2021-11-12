@@ -62,15 +62,14 @@ public class QuestionServiceImpl implements QuestionService {
 
         question.setTagDetailList(tagDetails);
 
-        questionRepository.save(question);
+        Question savedQuestion = questionRepository.save(question);
 
         List<QuestionAttachmentDTO> questionAttachmentDTOS = postQuestionDTO.getQuestionAttachmentDTOList();
-
-        boolean addAttchment = false;
 
         if (questionAttachmentDTOS != null) {
             for (QuestionAttachmentDTO questionAttachmentDTO : questionAttachmentDTOS) {
                 QuestionAttachment questionAttachment = new QuestionAttachment(question, questionAttachmentDTO.getAttachmentUrl());
+                questionAttachment.setQuestion(savedQuestion);
                 questionAttachmentRepository.save(questionAttachment);
             }
         }
