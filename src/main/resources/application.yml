@@ -46,3 +46,9 @@ app:
       images: C:\Users\TR0J3N's PC\Pictures\Individual Project\uploaded-images\
       resources: C:\Users\TR0J3N's PC\Pictures\Individual Project\resources\
 
+notify:
+  sms:
+    url: https://app.notify.lk/api/v1/send
+    user_id: 14933
+    api_key: gJ6Y4R8Te2RmDWAl607l
+    sender_id: NotifyDEMO

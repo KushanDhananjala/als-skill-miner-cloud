@@ -15,6 +15,7 @@ import lk.edu.esoft.alsskillminercloud.repository.UserRepository;
 import lk.edu.esoft.alsskillminercloud.service.AnswerService;
 import lk.edu.esoft.alsskillminercloud.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,6 +27,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -40,6 +42,15 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Value("${spring.mail.username}")
     private String senderEmail;
+
+    @Value("${notify.sms.user_id}")
+    private Integer userId;
+    @Value("${notify.sms.api_key}")
+    private String apiKey;
+    @Value("${notify.sms.sender_id}")
+    private String senderId;
+    @Value("${notify.sms.url}")
+    private String url;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
@@ -67,6 +78,7 @@ public class AnswerServiceImpl implements AnswerService {
         long currentUserPoints = userRepository.getUserPoints(user.getName());
         userService.updateUserPoints(user.getName(), currentUserPoints + 5);
 
+        sendSMS(question, user, postAnswerDTO.getAnswerDTO().getAnswer());
         sendEmailAnswerProvided(question, user, postAnswerDTO.getAnswerDTO().getAnswer());
 
         return true;
@@ -156,5 +168,25 @@ public class AnswerServiceImpl implements AnswerService {
 
         message.setText(msgBody);
         emailSender.send(message);
+    }
+
+    private void sendSMS(Question question, User user, String answer) {
+
+        try {
+
+//            RestTemplate restTemplate = new RestTemplate();
+//
+//            String msgBody = user.getName() + " has provided an answer for, \n\n" +
+//                    question.getTitle() + "\n" +
+//                    question.getBody() + "\n\n" +
+//                    "The answer is : " + answer + "\n" +
+//                    "Please visit http://localhost:4200/main/question?questionID=" + question.getId() + " for more details.";
+//
+//            NotifySMSDTO notifySMSDTO = new NotifySMSDTO(userId.longValue(), apiKey, senderId, Long.parseLong("94" + question.getUser().getMobileNo()), msgBody);
+//
+//            ResponseEntity<Object> objectResponseEntity = restTemplate.postForEntity(url, notifySMSDTO, Object.class);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }
