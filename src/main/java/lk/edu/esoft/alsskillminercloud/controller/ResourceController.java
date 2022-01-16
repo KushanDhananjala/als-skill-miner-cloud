@@ -43,7 +43,7 @@ public class ResourceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ResourceDTO>> getStreams() {
+    public ResponseEntity<List<ResourceDTO>> getAllResources() {
         try {
             return ResponseEntity.ok(resourceService.getAllResources());
         } catch (Exception e) {

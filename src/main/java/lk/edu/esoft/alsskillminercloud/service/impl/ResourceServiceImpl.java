@@ -133,9 +133,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<ResourceDTO> getResourcesByLastUpdatedDateRange(String strFromDate, String strToDate) throws Exception {
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date fromDate = df.parse(strFromDate);
-        Date toDate = df.parse(strToDate);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date fromDate = df.parse(strFromDate + " 00:00:00");
+        Date toDate = df.parse(strToDate + " 23:59:59");
 
         return resourceRepository
                 .findAllByLastUpdatedBetween(fromDate, toDate)
