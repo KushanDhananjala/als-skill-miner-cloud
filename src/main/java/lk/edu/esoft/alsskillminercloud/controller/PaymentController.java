@@ -1,6 +1,7 @@
 package lk.edu.esoft.alsskillminercloud.controller;
 
 import lk.edu.esoft.alsskillminercloud.dto.PaymentDTO;
+import lk.edu.esoft.alsskillminercloud.dto.ResourcesPurchaseReportDTO;
 import lk.edu.esoft.alsskillminercloud.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,17 @@ public class PaymentController {
     public List<PaymentDTO> getPaymentsByUserId(@PathVariable("userName") String userName) {
         try {
             return paymentService.getPaymentsByUserId(userName);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/by-payment-date/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ResourcesPurchaseReportDTO> findAllByPayedDateTimeIsBetween(@PathVariable("fromDate") String fromDate,
+                                                                            @PathVariable("toDate") String toDate) {
+        try {
+            return paymentService.findAllByPayedDateTimeIsBetween(fromDate, toDate);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;

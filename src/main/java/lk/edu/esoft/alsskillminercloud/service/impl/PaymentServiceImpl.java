@@ -1,6 +1,7 @@
 package lk.edu.esoft.alsskillminercloud.service.impl;
 
 import lk.edu.esoft.alsskillminercloud.dto.PaymentDTO;
+import lk.edu.esoft.alsskillminercloud.dto.ResourcesPurchaseReportDTO;
 import lk.edu.esoft.alsskillminercloud.entity.Payment;
 import lk.edu.esoft.alsskillminercloud.entity.Resource;
 import lk.edu.esoft.alsskillminercloud.entity.User;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +67,15 @@ public class PaymentServiceImpl implements PaymentService {
             }
         }
         return paymentDTOS;
+    }
+
+    @Override
+    public List<ResourcesPurchaseReportDTO> findAllByPayedDateTimeIsBetween(String strFromDate, String strToDate) throws Exception {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fromDate = LocalDateTime.parse(strFromDate + " 00:00:00", formatter);
+        LocalDateTime toDate = LocalDateTime.parse(strToDate + " 23:59:59", formatter);
+
+        return paymentRepository.findAllByPayedDateTimeIsBetween(fromDate, toDate);
     }
 }
