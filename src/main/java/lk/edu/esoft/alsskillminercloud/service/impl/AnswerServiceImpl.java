@@ -1,9 +1,6 @@
 package lk.edu.esoft.alsskillminercloud.service.impl;
 
-import lk.edu.esoft.alsskillminercloud.dto.AnswerAttachmentDTO;
-import lk.edu.esoft.alsskillminercloud.dto.AnswerDTO;
-import lk.edu.esoft.alsskillminercloud.dto.CustomAnswerDTO;
-import lk.edu.esoft.alsskillminercloud.dto.PostAnswerDTO;
+import lk.edu.esoft.alsskillminercloud.dto.*;
 import lk.edu.esoft.alsskillminercloud.entity.Answer;
 import lk.edu.esoft.alsskillminercloud.entity.AnswerAttachment;
 import lk.edu.esoft.alsskillminercloud.entity.Question;
@@ -17,11 +14,13 @@ import lk.edu.esoft.alsskillminercloud.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -174,17 +173,17 @@ public class AnswerServiceImpl implements AnswerService {
 
         try {
 
-//            RestTemplate restTemplate = new RestTemplate();
-//
-//            String msgBody = user.getName() + " has provided an answer for, \n\n" +
-//                    question.getTitle() + "\n" +
-//                    question.getBody() + "\n\n" +
-//                    "The answer is : " + answer + "\n" +
-//                    "Please visit http://localhost:4200/main/question?questionID=" + question.getId() + " for more details.";
-//
-//            NotifySMSDTO notifySMSDTO = new NotifySMSDTO(userId.longValue(), apiKey, senderId, Long.parseLong("94" + question.getUser().getMobileNo()), msgBody);
-//
-//            ResponseEntity<Object> objectResponseEntity = restTemplate.postForEntity(url, notifySMSDTO, Object.class);
+            RestTemplate restTemplate = new RestTemplate();
+
+            String msgBody = user.getName() + " has provided an answer for, \n\n" +
+                    question.getTitle() + "\n" +
+                    question.getBody() + "\n\n" +
+                    "The answer is : " + answer + "\n" +
+                    "Please visit http://localhost:4200/main/question?questionID=" + question.getId() + " for more details.";
+
+            NotifySMSDTO notifySMSDTO = new NotifySMSDTO(userId.longValue(), apiKey, senderId, Long.parseLong("94" + question.getUser().getMobileNo().substring(1)), msgBody);
+
+            ResponseEntity<Object> objectResponseEntity = restTemplate.postForEntity(url, notifySMSDTO, Object.class);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
